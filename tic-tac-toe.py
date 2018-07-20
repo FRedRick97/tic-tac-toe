@@ -74,7 +74,6 @@ def check(row,col, symbol):
 
 
 def turn(player):
-    global player_dict
     flag = True
     posi = int(input('Choose position to enter ::\n'))
     while (flag):
@@ -86,19 +85,26 @@ def turn(player):
     if(len(posi_list) <= 4):
         win = check(move[0],move[1], mylist[move[0]][move[1]])
         if (win == 0):
+            if(len(posi_list) == 0):
+                print('*************** ITS A DRAW ***************')
+                last_code()
             pass
         else:
             print('\n' * 10)
             print('*' *10, end= ' ')
             print(f'{player_dict[player]} Wins :) xD ', '*' *10 )
-            player_dict = {}
-            print("Do you wish to play again ?")
-            res = input("Press 'y' or 'n' to answer.\n")
-            if(res == 'y' or res == 'Y'):
-                main_game()
-            else:
-                print('Thank You for playing. Have a nice day!')
-                exit()
+            last_code()
+
+def last_code():
+    global player_dict
+    player_dict = {}
+    print("Do you wish to play again ?")
+    res = input("Press 'y' or 'n' to answer.\n")
+    if(res == 'y' or res == 'Y'):
+        main_game()
+    else:
+        print('Thank You for playing. Have a nice day!')
+        exit()
 
 def update(x, symbol):
     a,b = posi_list[x][0], posi_list[x][1]
